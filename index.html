@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanity Benessere — Giussano</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FEFCF9;
+    --sand: #EDE5D8;
+    --blush: #E5D8CE;
+    --rose-dust: #D9C8BC;
+    --accent: #C8B4A6;
+    --accent-hover: #B8A096;
+    --warm-gray: #C0B3AA;
+    --text-dark: #4A3F38;
+    --text-mid: #7A6D65;
+    --text-light: #A89990;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.3rem 3rem;
+    background: rgba(254,252,249,0.93);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(200,180,166,0.2);
+    transition: box-shadow 0.4s;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--text-dark);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.4rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--accent-hover); }
+
+  /* BUTTONS */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.9rem 2rem;
+    background: var(--accent);
+    color: var(--warm-white);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--accent);
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    white-space: nowrap;
+  }
+  .btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--accent);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    white-space: nowrap;
+  }
+  .btn-outline:hover {
+    background: var(--blush);
+    color: var(--text-dark);
+  }
+
+  .cta-row {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+    padding: 8rem 2rem 5rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 65% 50% at 50% 30%, rgba(200,180,166,0.14) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 60% at 15% 85%, rgba(237,229,216,0.5) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 60% at 85% 85%, rgba(237,229,216,0.5) 0%, transparent 55%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 740px;
+    margin: 0 auto;
+    animation: fadeUp 1.1s ease both;
+  }
+
+  .eyebrow {
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    margin-bottom: 1.8rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.7rem, 6vw, 5rem);
+    font-weight: 300;
+    line-height: 1.12;
+    color: var(--text-dark);
+    margin-bottom: 1.8rem;
+  }
+  .hero-title em { font-style: italic; color: var(--accent-hover); }
+
+  .hero-sub {
+    font-size: 0.87rem;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--text-mid);
+    line-height: 1.85;
+    max-width: 450px;
+    margin: 0 auto 2.8rem;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--warm-gray);
+    font-size: 0.56rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 34px;
+    background: linear-gradient(to bottom, var(--warm-gray), transparent);
+  }
+
+  /* COMMONS */
+  section { padding: 7rem 2rem; }
+  .container { max-width: 1060px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-size: 0.58rem;
+    font-weight: 300;
+    letter-spacing: 0.44em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .section-eyebrow::before,
+  .section-eyebrow::after {
+    content: '';
+    flex: 0 0 36px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.45;
+  }
+
+  .section-eyebrow.left {
+    justify-content: flex-start;
+  }
+  .section-eyebrow.left::before { display: none; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.9rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.18;
+    color: var(--text-dark);
+    margin-bottom: 1.4rem;
+  }
+  .section-title em { font-style: italic; color: var(--accent-hover); }
+
+  .hairline {
+    width: 44px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 2rem;
+    opacity: 0.5;
+  }
+
+  /* EXPERIENCE */
+  .experience { background: var(--sand); }
+
+  .exp-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .experience-text p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 2;
+    color: var(--text-mid);
+    margin-bottom: 1.4rem;
+  }
+  .experience-text p strong { font-weight: 400; color: var(--text-dark); }
+
+  .pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.1rem;
+  }
+
+  .pillar {
+    padding: 1.7rem 1.4rem;
+    background: rgba(254,252,249,0.72);
+    border: 1px solid rgba(200,180,166,0.22);
+    transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  }
+  .pillar:hover {
+    background: var(--warm-white);
+    border-color: var(--accent);
+    transform: translateY(-3px);
+  }
+
+  .pillar-icon { font-size: 1.1rem; margin-bottom: 0.7rem; display: block; }
+  .pillar h4 {
+    font-size: 0.73rem;
+    font-weight: 400;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+  }
+  .pillar p { font-size: 0.77rem; font-weight: 300; color: var(--text-light); line-height: 1.65; }
+
+  /* SERVICES */
+  .services { background: var(--warm-white); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--blush);
+    border: 1px solid var(--blush);
+    margin-top: 3.5rem;
+  }
+
+  .service-card {
+    background: var(--warm-white);
+    padding: 2.2rem 1.8rem;
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.4s ease;
+  }
+  .service-card:hover { background: var(--cream); }
+  .service-card:hover::after { width: 100%; }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: rgba(200,180,166,0.3);
+    line-height: 1;
+    margin-bottom: 0.9rem;
+  }
+  .service-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.7rem;
+  }
+  .service-card p {
+    font-size: 0.79rem;
+    font-weight: 300;
+    color: var(--text-light);
+    line-height: 1.75;
+  }
+
+  /* WHY */
+  .why { background: var(--cream); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    border: 1px solid var(--blush);
+    margin-top: 3.5rem;
+  }
+
+  .why-item {
+    padding: 2.2rem 1.6rem;
+    border-right: 1px solid var(--blush);
+    transition: background 0.3s;
+  }
+  .why-item:last-child { border-right: none; }
+  .why-item:hover { background: var(--warm-white); }
+
+  .why-label {
+    font-size: 0.56rem;
+    font-weight: 400;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    margin-bottom: 0.7rem;
+  }
+  .why-item h4 {
+    font-size: 0.83rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+  .why-item p { font-size: 0.75rem; font-weight: 300; color: var(--text-light); line-height: 1.7; }
+
+  /* REVIEWS */
+  .reviews { background: var(--sand); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    margin-top: 3.5rem;
+  }
+
+  .review-card {
+    background: var(--warm-white);
+    padding: 2.2rem;
+    border: 1px solid rgba(200,180,166,0.22);
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .review-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 34px rgba(200,180,166,0.18);
+  }
+
+  .review-stars { color: var(--accent-hover); font-size: 0.7rem; letter-spacing: 0.15em; margin-bottom: 1rem; }
+
+  .review-quote {
+    position: absolute;
+    top: 1.2rem; right: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.2rem;
+    color: rgba(200,180,166,0.18);
+    line-height: 1;
+  }
+
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.02rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-dark);
+    line-height: 1.78;
+    margin-bottom: 1.4rem;
+  }
+
+  .review-author {
+    font-size: 0.64rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--warm-gray);
+  }
+
+  /* CONTACT */
+  .contact { background: var(--warm-white); }
+
+  .contact-inner { max-width: 580px; margin: 0 auto; text-align: center; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--blush);
+    border: 1px solid var(--blush);
+    margin: 3rem 0 2.5rem;
+  }
+
+  .contact-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1.8rem 1rem;
+    background: var(--warm-white);
+    text-decoration: none;
+    color: var(--text-mid);
+    font-size: 0.78rem;
+    font-weight: 300;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+  }
+  .contact-tile:hover { background: var(--cream); color: var(--text-dark); }
+  .contact-tile .tile-icon { font-size: 1.25rem; }
+  .contact-tile .tile-label {
+    font-size: 0.56rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent-hover);
+    margin-bottom: 0.15rem;
+  }
+
+  /* FOOTER */
+  .footer-phrase {
+    background: var(--sand);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+  .footer-phrase p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 3.2vw, 2.6rem);
+    font-weight: 300;
+    color: var(--text-dark);
+    letter-spacing: 0.05em;
+    line-height: 1.45;
+  }
+  .footer-phrase p strong {
+    font-weight: 500;
+    font-style: italic;
+    color: var(--accent-hover);
+  }
+
+  .footer-bottom {
+    background: var(--blush);
+    padding: 1.4rem 2rem;
+    text-align: center;
+  }
+  .footer-bottom p {
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    color: var(--text-light);
+    text-transform: uppercase;
+  }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(26px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 0.45; transform: translateX(-50%) translateY(0); }
+    50%      { opacity: 1;    transform: translateX(-50%) translateY(5px); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .exp-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-item { border-bottom: 1px solid var(--blush); }
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    nav { padding: 1.1rem 1.5rem; }
+    .nav-links { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    section { padding: 5rem 1.4rem; }
+    .pillars { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Vanity &thinsp;·&thinsp; Benessere</div>
+  <ul class="nav-links">
+    <li><a href="#esperienza" onclick="smoothTo(event,'esperienza')">L'esperienza</a></li>
+    <li><a href="#trattamenti" onclick="smoothTo(event,'trattamenti')">Trattamenti</a></li>
+    <li><a href="#recensioni" onclick="smoothTo(event,'recensioni')">Recensioni</a></li>
+    <li><a href="#contatti" onclick="smoothTo(event,'contatti')">Contatti</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Estetica &nbsp;·&nbsp; Tecnologie &nbsp;·&nbsp; Solarium &nbsp;—&nbsp; Giussano</div>
+    <h1 class="hero-title">
+      Il tuo rituale di bellezza,<br><em>elevato a esperienza.</em>
+    </h1>
+    <p class="hero-sub">
+      Un luogo dove la cura diventa arte. Ogni dettaglio parla di eccellenza,<br>ogni visita si trasforma in un momento tutto per te.
+    </p>
+    <div class="cta-row">
+      <a href="tel:0362173946" class="btn-primary">📞 Chiama ora</a>
+      <a href="#trattamenti" onclick="smoothTo(event,'trattamenti')" class="btn-outline">Scopri i trattamenti</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="experience" id="esperienza">
+  <div class="container">
+    <div class="exp-inner">
+      <div class="experience-text reveal">
+        <div class="section-eyebrow left">L'esperienza Vanity</div>
+        <h2 class="section-title" style="text-align:left;">Dove la cura<br>incontra <em>l'eccellenza.</em></h2>
+        <p>Vanity Benessere non è solo un centro estetico. È uno spazio pensato per farti sentire straordinaria, in ogni momento della tua visita. Dall'accoglienza al trattamento, ogni gesto è calibrato con cura e professionalità.</p>
+        <p>Utilizziamo <strong>tecnologie di ultima generazione</strong>, materiali premium e un approccio personalizzato che mette la tua pelle e il tuo benessere al centro di tutto. La pulizia impeccabile non è un dettaglio: è la nostra promessa.</p>
+      </div>
+      <div class="pillars reveal">
+        <div class="pillar">
+          <span class="pillar-icon">✦</span>
+          <h4>Igiene Assoluta</h4>
+          <p>Protocolli rigorosi per la massima sicurezza ad ogni trattamento.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">◇</span>
+          <h4>Tecnologie Premium</h4>
+          <p>Strumentazione professionale aggiornata per risultati superiori.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">◈</span>
+          <h4>Staff Qualificato</h4>
+          <p>Professioniste esperte con una cura autentica per ogni cliente.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-icon">❋</span>
+          <h4>Aperto la Domenica</h4>
+          <p>Siamo qui anche quando gli altri sono chiusi.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="trattamenti">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <div class="section-eyebrow">I nostri trattamenti</div>
+      <h2 class="section-title">Ogni cura, <em>un'arte raffinata.</em></h2>
+    </div>
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Ceretta & Ceretta Brasiliana</h3>
+        <p>La depilazione portata al massimo del comfort. La nostra tecnica brasiliana garantisce un risultato impeccabile con un'esperienza sorprendentemente delicata sulla pelle.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Depilazione Laser</h3>
+        <p>Tecnologia laser professionale per una riduzione permanente e sicura. Un investimento nella tua bellezza quotidiana, eseguito con la massima precisione.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Solarium Professionale</h3>
+        <p>Lettini di ultima generazione per un'abbronzatura uniforme, sicura e luminosa in un ambiente moderno e perfettamente igienizzato.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Laminazione Ciglia & Sopracciglia</h3>
+        <p>Definizione perfetta, sguardo intenso. La laminazione esalta la tua bellezza naturale con risultati duraturi ed eleganti.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>Manicure & Pedicure</h3>
+        <p>Mani e piedi curati con attenzione artigianale e prodotti selezionati per una cura completa, estetica e rigenerante.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h3>Unghie in Acrilico</h3>
+        <p>Forme perfette, durata eccezionale. Unghie in acrilico che uniscono estetica e resistenza per un risultato professionale duraturo.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">07</div>
+        <h3>Massaggi</h3>
+        <p>Tensioni sciolte, mente liberata. I nostri trattamenti rigenerano corpo e mente, lasciandoti in uno stato di benessere profondo.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">08</div>
+        <h3>Abbellimento Sopracciglia</h3>
+        <p>Il dettaglio che cambia tutto. Sopracciglia valorizzate per esaltare la tua unicità, con una precisione che si vede e si sente.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <div class="hairline"></div>
+      <div class="section-eyebrow">Perché sceglierci</div>
+      <h2 class="section-title">La nostra <em>differenza.</em></h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-item">
+        <div class="why-label">Eccellenza</div>
+        <h4>Ambiente Elegante</h4>
+        <p>Un centro curato in ogni dettaglio, dove ti senti subito a tuo agio.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-label">Sicurezza</div>
+        <h4>Pulizia Impeccabile</h4>
+        <p>Standard igienici elevati, ben oltre il necessario. La tua sicurezza è la nostra priorità.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-label">Innovazione</div>
+        <h4>Tecnologie Avanzate</h4>
+        <p>Strumentazioni di ultima generazione per risultati che superano le aspettative.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-label">Esperienza</div>
+        <h4>Staff Specializzato</h4>
+        <p>Un team preparato e appassionato, sempre aggiornato sulle ultime tecniche.</p>
+      </div>
+      <div class="why-item">
+        <div class="why-label">Fiducia</div>
+        <h4>Recensioni ★★★★★</h4>
+        <p>Centinaia di clienti soddisfatte ci scelgono da anni. La nostra reputazione parla per noi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews" id="recensioni">
+  <div class="container">
+    <div style="text-align:center;" class="reveal">
+      <div class="section-eyebrow">Cosa dicono di noi</div>
+      <h2 class="section-title">Le nostre <em>clienti parlano.</em></h2>
+    </div>
+    <div class="reviews-grid reveal">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-quote">"</div>
+        <p class="review-text">Un'esperienza che non mi aspettavo: ceretta quasi indolore, ambiente impeccabile e un'accoglienza che ti mette subito a tuo agio. Tornerò sicuramente.</p>
+        <div class="review-author">— Alessia M.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-quote">"</div>
+        <p class="review-text">Il solarium è modernissimo e sicuro. Si percepisce che investono in tecnologie di qualità. L'igiene è al top, ogni volta mi sento in ottime mani.</p>
+        <div class="review-author">— Valentina R.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-quote">"</div>
+        <p class="review-text">Professionalità autentica, non di facciata. Sono cliente da anni e non ho mai trovato un centro all'altezza come Vanity. La laminazione ciglia è fantastica.</p>
+        <div class="review-author">— Chiara B.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-quote">"</div>
+        <p class="review-text">Aperto anche la domenica — un dettaglio che per me fa tutta la differenza. Centro elegante, staff gentile e preparato. Mi sono sentita coccolta dall'inizio alla fine.</p>
+        <div class="review-author">— Federica T.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-quote">"</div>
+        <p class="review-text">Atmosfera rilassante, trattamenti di qualità superiore. Le unghie in acrilico durano settimane perfette. Non cambierei mai centro.</p>
+        <div class="review-author">— Silvia N.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-quote">"</div>
+        <p class="review-text">Ogni volta che entro da Vanity esco non solo più bella, ma anche più serena. È difficile trovare un posto dove si vive davvero il benessere a tutto tondo.</p>
+        <div class="review-author">— Martina G.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contatti">
+  <div class="container">
+    <div class="contact-inner reveal">
+      <div class="section-eyebrow">Vienici a trovare</div>
+      <h2 class="section-title">Inizia il tuo <em>rituale.</em></h2>
+      <p style="font-size:0.86rem;font-weight:300;color:var(--text-light);line-height:1.9;max-width:380px;margin:0 auto;">
+        Siamo a Giussano, pronti ad accoglierti in un ambiente pensato per farti stare bene.
+      </p>
+
+      <div class="contact-grid">
+        <a href="tel:0362173946" class="contact-tile">
+          <div class="tile-label">Telefono</div>
+          <div class="tile-icon">📞</div>
+          <span>0362 173 9046</span>
+        </a>
+        <div class="contact-tile">
+          <div class="tile-label">Indirizzo</div>
+          <div class="tile-icon">📍</div>
+          <span>Via G. Mercalli 4, Giussano</span>
+        </div>
+        <a href="https://maps.google.com/?q=Via+Giuseppe+Mercalli+4+Giussano" target="_blank" class="contact-tile">
+          <div class="tile-label">Indicazioni</div>
+          <div class="tile-icon">🗺️</div>
+          <span>Apri su Google Maps</span>
+        </a>
+      </div>
+
+      <div class="cta-row">
+        <a href="tel:0362173946" class="btn-primary">📞 Chiama ora</a>
+        <a href="https://maps.google.com/?q=Via+Giuseppe+Mercalli+4+Giussano" target="_blank" class="btn-outline">📍 Indicazioni</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer-phrase">
+  <p>Non è solo un trattamento.<br>È <strong>VANITY.</strong></p>
+</div>
+
+<div class="footer-bottom">
+  <p>Vanity Benessere &nbsp;·&nbsp; Via Giuseppe Mercalli 4, Giussano &nbsp;·&nbsp; Estetica · Tecnologie · Solarium</p>
+</div>
+
+<script>
+  function smoothTo(e, id) {
+    e.preventDefault();
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 40
+      ? '0 4px 26px rgba(74,63,56,0.07)'
+      : 'none';
+  });
+
+  document.querySelectorAll('.service-card, .review-card, .why-item, .pillar').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.08 + 's';
+  });
+</script>
+</body>
+</html>
